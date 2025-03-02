@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "list.h"
-
 typedef struct list_item {
     int value;
     struct list_item *next;
@@ -48,6 +46,19 @@ static void list_insert_before(list_t *l, list_item_t *before, list_item_t *item
         ;
     *p = item;
     (*p)->next = before;
+}
+
+static int list_size(list_t *l)
+{
+    if (!l || !(l->head))
+        return 0;
+    int count = 0;
+    list_item_t *n = l->head;
+    while (n) {
+        count++;
+        n = n->next;
+    }
+    return count;
 }
 
 static char *test_list(void)
