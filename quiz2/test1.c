@@ -1,4 +1,9 @@
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
+#include "list.h"
 
 struct listitem {
     uint16_t i;
@@ -123,6 +128,6 @@ int main(void)
 
     assert(i == ARRAY_SIZE(values));
     assert(list_empty(&testlist));
-
+    printf("pass test\n");
     return 0;
 }
