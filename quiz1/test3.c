@@ -1,3 +1,9 @@
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <assert.h>
+
 #include "list.h"
 
 typedef struct __node {
@@ -93,14 +99,14 @@ void quick_sort(struct list_head *list)
         struct list_head *L = begin[i], *R = list_tail(begin[i]);
         if (L != R) {
             struct list_head *pivot = L;
-            value = list_entry(pivot->next, node_t, list)->value;
+            value = list_entry(pivot, node_t, list)->value;
             struct list_head *p = pivot->next;
             pivot->next = NULL; /* break the list */
 
             while (p) {
                 struct list_head *n = p;
                 p = p->next;
-                int n_value = list_entry(n->next, node_t, list)->value;
+                int n_value = list_entry(n, node_t, list)->value;
                 if (n_value > value) {
                     n->next = right;
                     right = n;
@@ -144,5 +150,6 @@ int main(int argc, char **argv)
     assert(list_is_ordered(list));
     list_free(list);
     free(test_arr);
+    printf("pass test\n");
     return 0;
 }
