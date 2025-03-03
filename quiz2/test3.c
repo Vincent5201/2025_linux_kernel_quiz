@@ -1,4 +1,10 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 
+#include "list.h"
+
+#define MAP_HASH_SIZE(bits) (1U << (bits))
 
 struct hlist_head {
 	struct hlist_node *first;
@@ -111,6 +117,7 @@ void map_deinit(map_t *map)
 
 int *twoSum(int *nums, int numsSize, int target, int *returnSize)
 {
+    
     map_t *map = map_init(10);
     *returnSize = 0;
     int *ret = malloc(sizeof(int) * 2);
@@ -133,4 +140,17 @@ int *twoSum(int *nums, int numsSize, int target, int *returnSize)
 bail:
     map_deinit(map);
     return ret;
+}
+
+int main(void)
+{
+    int count = 10, retsize;
+    int nums[count];
+    nums[0] = 1;
+    for(int i=1;i<count;i++){
+        nums[i] = nums[i-1] * 2 + 1;
+    }
+    int *ret = twoSum(nums, count, 46, &retsize);
+    printf("%d %d\n", ret[0], ret[1]);
+    return 0;
 }
