@@ -1,13 +1,16 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 #define clz32(x) clz2(x, 0)
 
-static const int mask[] = {0, 8, 12, 16};
-static const int magic[] = {HHHH, 1, 0, 0};
+static const int mask[] = {0, 8, 12, 14};
+static const int magic[] = {1, 1, 0, 0};
 
 unsigned clz2(uint32_t x, int c)
 {
     if (!x && !c)
         return 32;
-
     uint32_t upper = (x >> (16 >> c));
     uint32_t lower = (x & (0xFFFF >> mask[c]));
     if (c == 3)
@@ -49,4 +52,13 @@ uint64_t sqrti(uint64_t x)
         m >>= 2;
     }
     return y;
+}
+
+int main(void)
+{
+    for (uint64_t i = 1; i <= 100 ;i++){
+        printf("%ld %ld\n", i, sqrti(i));
+    }
+    
+    return 0;
 }
