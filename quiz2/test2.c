@@ -172,13 +172,9 @@ uint32_t mysqrtf(uint32_t a0)
                 a0 >>= 6;
                 if (a0 & 0x02000000)
                     a0 |= 0xFC000000;
-
+                
+                a3 += a0;
                 if (a3 < a0) {
-                    a4 = 1;
-                } else {
-                    a4 = 0;
-                }
-                if (a4) {
                     a4 += a3;
                     a4 *= a4;
                     a1 <<= 16;
@@ -199,7 +195,7 @@ uint32_t mysqrtf(uint32_t a0)
 
 int main(void)
 {
-    for (float i = 2.0f; i <= 10 ;i += 0.5f){
+    for (float i = 20.0f; i <= 40 ;i += 1.0f){
         uint32_t a = *(uint32_t*)&i;
         uint32_t result32 = mysqrtf(a);
         float resultf = *(float*)&result32;
