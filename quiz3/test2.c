@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
+#include <stdio.h>
 
 /* Nonzero if X is not aligned on a "long" boundary */
 #define UNALIGNED(X) ((long) X & (sizeof(long) - 1))
@@ -26,7 +27,7 @@
 
 
 /* @return nonzero if (long)X contains the byte used to fill MASK. */
-#define DETECT_CHAR(X, mask) DETECT_NULL(~((~X) | (~mask)))
+#define DETECT_CHAR(X, mask) DETECT_NULL(X ^ mask)
 
 void *memchr_opt(const void *str, int c, size_t len)
 {
@@ -76,4 +77,14 @@ void *memchr_opt(const void *str, int c, size_t len)
     }
 
     return NULL;
+}
+
+int main()
+{   
+    const char str[] = "https://wiki.csie.ncku.edu.tw";
+    const char ch = '.';
+    
+    char *ret = memchr_opt(str, ch, strlen(str));
+    printf("String after |%c| is - |%s|\n", ch, ret);
+    return 0;
 }
