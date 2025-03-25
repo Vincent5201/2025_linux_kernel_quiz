@@ -681,7 +681,7 @@ void mpi_fdiv_qr(mpi_t q, mpi_t r, const mpi_t n, const mpi_t d)
     size_t start = mpi_sizeinbase(n0, 2) - 1;
 
     for (size_t i = start; i != (size_t) -1; --i) {
-        mpi_mul_2exp(r, r, 32);
+        mpi_mul_2exp(r, r, 1);
         if (mpi_testbit(n0, i) != 0)
             mpi_setbit(r, 0);
         if (mpi_cmp(r, d0) >= 0) {
